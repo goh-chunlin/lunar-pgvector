@@ -2,9 +2,7 @@
 ## Connect to EC2 Using SSM
 
 Start an SSM session:
-```bash
-aws ssm start-session --target <SSMTestInstanceID>
-```
+<img width="1840" alt="image" src="https://github.com/user-attachments/assets/626ee9b1-6974-4a47-9201-6c4bf2a5bb5e" />
 
 ## Install psql
 
@@ -46,3 +44,5 @@ This will quit the PostgreSQL session and return us to our shell or terminal.
 aws rds describe-db-engine-versions --default-only --engine postgres --profile chunlin_default --region ap-southeast-1
 ```
 <img width="1837" alt="image" src="https://github.com/user-attachments/assets/9554ed44-21eb-4fe5-bb02-008346b20ca1" />
+
+<img width="1840" alt="image" src="https://github.com/user-attachments/assets/6f910a95-b401-4f5d-8ce6-f5f7bf88413d" />
