@@ -6,12 +6,35 @@ Start an SSM session:
 aws ssm start-session --target <SSMTestInstanceID>
 ```
 
+## Install psql
+
+```bash
+sudo yum update -y
+
+sudo yum search "postgres"
+
+sudo yum install postgresql16
+```
+
 ## Connect to RDS
 
 From within the SSM session, use psql to connect to the database:
 ```bash
-psql -h <RDSInstanceEndpoint> -U admin -d postgres
+psql --host=<RDSInstanceEndpoint> --username=hsr_db_superuser --dbname=postgres
 ```
+
+To list all tables:
+```sql
+\dt
+```
+
+To exit the psql command-line interface, simply type:
+
+```sql
+\q
+```
+
+This will quit the PostgreSQL session and return us to our shell or terminal.
 
 ## Screenshots
 
