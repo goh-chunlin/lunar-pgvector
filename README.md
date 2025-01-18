@@ -51,6 +51,74 @@ CREATE EXTENSION vector;
 SELECT typname FROM pg_type WHERE typname = 'vector';
 ```
 
+```python
+import json
+import torch
+import numpy as np
+from transformers import AutoTokenizer, AutoModel
+
+# Load your Hugging Face model
+model_name = 'distilbert-base-uncased'  # Example model; replace with your choice
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModel.from_pretrained(model_name)
+
+# Function to generate embedding for a single text
+def generate_embedding(text):
+    # Tokenize the input text
+    inputs = tokenizer(text, return_tensors='pt', truncation=True, padding=True)
+    
+    # Perform a forward pass to get embeddings
+    with torch.no_grad():
+        outputs = model(**inputs)
+        embeddings = outputs.last_hidden_state.mean(dim=1)  # Average the token embeddings
+    
+    return embeddings.squeeze().numpy()  # Convert to numpy array
+
+# Function to generate INSERT INTO statements with vectors
+def generate_insert_statements(data):
+    # Initialize list to store SQL statements
+    insert_statements = []
+
+    for record in data:
+        # Extracting text and id from the record
+        id = record.get('id')
+        text = record.get('text')
+
+        # Generate the embedding for the text
+        embedding = generate_embedding(text)
+        
+        # Convert the embedding to a list
+        embedding_list = embedding.tolist()
+        
+        # Create the SQL INSERT INTO statement
+        sql_statement = f"""
+        INSERT INTO embeddings (id, vector, text)
+        VALUES ('{id}', ARRAY{embedding_list}, '{text}')
+        ON CONFLICT (id) DO UPDATE
+        SET vector = EXCLUDED.vector, text = EXCLUDED.text;
+        """
+        
+        # Append the statement to the list
+        insert_statements.append(sql_statement)
+
+    return insert_statements
+
+# Example data
+data = [
+    {"id": "1", "text": "This is a sample text."},
+    {"id": "2", "text": "Another example text for embedding."},
+    {"id": "3", "text": "Yet another piece of text."}
+]
+
+# Generate the INSERT INTO statements
+insert_statements = generate_insert_statements(data)
+
+# Print out the generated SQL statements
+for statement in insert_statements:
+    print(statement)
+
+```
+
 ## Screenshots
 
 <img width="1840" alt="image" src="https://github.com/user-attachments/assets/e2848531-9e47-4142-82f4-4e264229cc55" />
