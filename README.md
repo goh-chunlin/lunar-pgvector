@@ -8,7 +8,7 @@ Locally:
 [Installation](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-macos-overview.html#install-plugin-macos-signed)
 
 ```bash
-aws ssm start-session --target i-07e8f1f17281c4a76 --profile chunlin_default --region ap-southeast-1
+aws ssm start-session --target <SSMTestInstanceID> --profile chunlin_default --region ap-southeast-1 --document-name AWS-StartPortForwardingSessionToRemoteHost --parameters host="<RDSInstanceEndpoint>",portNumber="5432",localPortNumber="9000"
 ```
 
 ## Install psql
