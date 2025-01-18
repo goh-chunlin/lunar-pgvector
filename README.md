@@ -43,6 +43,14 @@ To exit the psql command-line interface, simply type:
 
 This will quit the PostgreSQL session and return us to our shell or terminal.
 
+## Install pgvector
+
+```
+CREATE EXTENSION vector;
+
+SELECT typname FROM pg_type WHERE typname = 'vector';
+```
+
 ## Screenshots
 
 <img width="1840" alt="image" src="https://github.com/user-attachments/assets/e2848531-9e47-4142-82f4-4e264229cc55" />
