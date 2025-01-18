@@ -11,6 +11,8 @@ Locally:
 aws ssm start-session --target <SSMTestInstanceID> --profile chunlin_default --region ap-southeast-1 --document-name AWS-StartPortForwardingSessionToRemoteHost --parameters host="<RDSInstanceEndpoint>",portNumber="5432",localPortNumber="9000"
 ```
 
+[Reference](https://aws.amazon.com/blogs/database/securely-connect-to-an-amazon-rds-or-amazon-ec2-database-instance-remotely-with-your-preferred-gui/)
+
 ## Install psql
 
 ```bash
