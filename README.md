@@ -4,6 +4,13 @@
 Start an SSM session:
 <img width="1840" alt="image" src="https://github.com/user-attachments/assets/626ee9b1-6974-4a47-9201-6c4bf2a5bb5e" />
 
+Locally:
+[Installation](https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-macos-overview.html#install-plugin-macos-signed)
+
+```bash
+aws ssm start-session --target i-07e8f1f17281c4a76 --profile chunlin_default --region ap-southeast-1
+```
+
 ## Install psql
 
 ```bash
