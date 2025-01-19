@@ -1,3 +1,7 @@
+CREATE EXTENSION vector;
+
+SELECT typname FROM pg_type WHERE typname = 'vector';
+
 CREATE TABLE IF NOT EXISTS embeddings (
     id TEXT PRIMARY KEY,
     vector VECTOR(768),  -- Adjust the vector size based on your model
