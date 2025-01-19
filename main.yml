@@ -121,6 +121,7 @@ Resources:
   # RDS PostgreSQL Instance
   RelicDBInstance:
     Type: AWS::RDS::DBInstance
+    DeletionPolicy: Delete
     Properties:
       DBInstanceIdentifier: hsr-relics-db
       DBInstanceClass: db.m5d.large
